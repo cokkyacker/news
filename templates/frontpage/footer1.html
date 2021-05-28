@@ -1,0 +1,26 @@
+{% load static %}
+{#通过{% include '模板块' %}#}
+{% include 'frontpage/header.html' %}
+<div class="container">
+    <ul class="list-group list-group-flush">
+        {% for item in post.object_list %}
+            <li class="list-group-item"><a href="/frontpage/article/?articleid={{ item.id }}">{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if post.has_previous %}
+                <li class="page-item"><a class="page-link" href="/frontpage/articletype/?articletypeid={{ articletypeid }}&pagenum={{ post.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            {% for i in pages %}
+                <li class="page-item"><a class="page-link" href="/frontpage/articletype/?articletypeid={{ articletypeid }}&pagenum={{ i }}">{{ i }}</a></li>
+            {% endfor %}
+
+            {% if post.has_next %}
+                <li class="page-item"><a class="page-link" href="/frontpage/articletype/?articletypeid={{ articletypeid }}&pagenum={{ post.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% include 'frontpage/footer.html' %}
+
